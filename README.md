@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🌐 Frontend
 
-## Getting Started
+Next.js 14 (App Router) → modern React framework, SSR/SSG for SEO-friendly dashboards.
 
-First, run the development server:
+Tailwind CSS → fast styling.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Shadcn/ui → ready-to-use components (forms, modals, buttons).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Framer Motion → smooth animations.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Recharts / Chart.js → analytics charts.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+🗄 Backend
 
-## Learn More
+Next.js API Routes (or Server Actions) → keep frontend + backend in one codebase.
 
-To learn more about Next.js, take a look at the following resources:
+Prisma ORM → type-safe database queries + migrations.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+PostgreSQL (hosted on Neon.tech, Railway, or Render) → reliable, scalable SQL database.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🔐 Authentication
 
-## Deploy on Vercel
+NextAuth.js (Auth.js v5) → handle email/password, OAuth (Google, Twitter, LinkedIn, etc.).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Stores sessions and accounts in PostgreSQL.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+💳 Payments
+
+Stripe → subscriptions, tiered pricing (Free, Pro, Agency).
+
+Webhooks → update subscription status in PostgreSQL.
+
+📩 Emails / Notifications
+
+Resend (super clean Next.js integration) → transactional emails (weekly reports, welcome emails).
+
+Alternative: Nodemailer + SMTP if you want fully self-managed.
+
+⚙️ Background Jobs (for fetching social media data daily)
+
+Vercel Cron Jobs → if you stay on Vercel.
+
+Or BullMQ + Upstash Redis → if you need more control.
+
+☁️ Infrastructure
+
+Frontend/Backend Hosting: Vercel (best fit for Next.js).
+
+Database Hosting: Neon.tech / Railway (Postgres hosting).
+
+File Storage (if needed): UploadThing, Cloudinary, or AWS S3.
