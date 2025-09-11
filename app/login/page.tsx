@@ -33,6 +33,8 @@ export default function LoginPage() {
         redirect: false,
       })
 
+      console.log("result",result)
+
       if (result?.error) {
         throw new Error("Invalid email or password")
       }

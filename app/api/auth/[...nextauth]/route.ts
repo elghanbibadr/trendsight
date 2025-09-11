@@ -3,8 +3,8 @@ import { NextAuthOptions } from "next-auth"
 import NextAuth from "next-auth/next"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import { PrismaClient } from "@prisma/client"
 import bcrypt from "bcryptjs"
+import { PrismaClient } from "@/lib/generated/prisma"
 
 const prisma = new PrismaClient()
 
@@ -19,7 +19,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
 
-        console.log("authoziring")
+        console.log("authoziring",credentials)
         if (!credentials?.email || !credentials?.password) {
           return null
         }
@@ -30,13 +30,15 @@ export const authOptions: NextAuthOptions = {
           }
         })
 
-        if (!user || !user.password) {
+        console.log("founded user",user)
+
+        if (!user || !user.hashedPassword) {
           return null
         }
 
         const isPasswordValid = await bcrypt.compare(
           credentials.password,
-          user.password
+          user.hashedPassword
         )
 
         if (!isPasswordValid) {
@@ -46,7 +48,7 @@ export const authOptions: NextAuthOptions = {
         return {
           id: user.id,
           email: user.email,
-          name: user.name,
+          name: user.userName
         }
       }
     })
