@@ -41,6 +41,8 @@ export const authOptions: NextAuthOptions = {
           user.hashedPassword
         )
 
+
+        console.log("is valud passw",isPasswordValid)
         if (!isPasswordValid) {
           return null
         }

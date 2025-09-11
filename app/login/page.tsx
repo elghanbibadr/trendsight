@@ -42,8 +42,9 @@ export default function LoginPage() {
       toast("welcome back")
 
       router.push("/dashboard")
-    } catch (error) {
-      toast("error")
+    } catch (error:any) {
+     
+      toast.error(error.message)
     } finally {
       setIsLoading(false)
     }
