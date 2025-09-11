@@ -153,6 +153,8 @@ export function AnalyticsOverview({ timeRange, platform }: AnalyticsOverviewProp
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={400}>
+            <>
+            
             {chartType === "line" && (
               <LineChart data={mockData}>
                 <XAxis dataKey="date" />
@@ -208,6 +210,7 @@ export function AnalyticsOverview({ timeRange, platform }: AnalyticsOverviewProp
                 <Line type="monotone" dataKey="engagement" stroke="hsl(var(--chart-2))" strokeWidth={2} />
               </ComposedChart>
             )}
+            </>
           </ResponsiveContainer>
         </CardContent>
       </Card>
