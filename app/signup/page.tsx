@@ -1,34 +1,60 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
-import { BarChart3, Eye, EyeOff, Check } from "lucide-react"
+import { useState } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import { BarChart3, Eye, EyeOff, Check } from "lucide-react";
 
 export default function SignupPage() {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     agreeToTerms: false,
-  })
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     // TODO: Implement signup logic
-    console.log("Signup attempt:", formData)
-  }
+    console.log("Signup attempt:", formData);
+
+    try {
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userName: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+
+      const result=await res.json();
+
+      console.log("result",result)
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
 
   const handleInputChange = (field: string, value: string | boolean) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
@@ -42,7 +68,9 @@ export default function SignupPage() {
         <Card>
           <CardHeader className="text-center">
             <CardTitle className="text-2xl">Create your account</CardTitle>
-            <CardDescription>Start tracking your social media analytics today</CardDescription>
+            <CardDescription>
+              Start tracking your social media analytics today
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -76,7 +104,9 @@ export default function SignupPage() {
                     type={showPassword ? "text" : "password"}
                     placeholder="Create a password"
                     value={formData.password}
-                    onChange={(e) => handleInputChange("password", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("password", e.target.value)
+                    }
                     required
                   />
                   <Button
@@ -86,7 +116,11 @@ export default function SignupPage() {
                     className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
                     onClick={() => setShowPassword(!showPassword)}
                   >
-                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
                   </Button>
                 </div>
               </div>
@@ -95,9 +129,14 @@ export default function SignupPage() {
                 <Checkbox
                   id="terms"
                   checked={formData.agreeToTerms}
-                  onCheckedChange={(checked) => handleInputChange("agreeToTerms", checked as boolean)}
+                  onCheckedChange={(checked) =>
+                    handleInputChange("agreeToTerms", checked as boolean)
+                  }
                 />
-                <Label htmlFor="terms" className="text-sm text-muted-foreground">
+                <Label
+                  htmlFor="terms"
+                  className="text-sm text-muted-foreground"
+                >
                   I agree to the{" "}
                   <Link href="/terms" className="text-accent hover:underline">
                     Terms of Service
@@ -109,13 +148,19 @@ export default function SignupPage() {
                 </Label>
               </div>
 
-              <Button type="submit" className="w-full" disabled={!formData.agreeToTerms}>
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={!formData.agreeToTerms}
+              >
                 Create Account
               </Button>
             </form>
 
             <div className="mt-6 text-center">
-              <div className="text-sm text-muted-foreground mb-4">Start with a 14-day free trial</div>
+              <div className="text-sm text-muted-foreground mb-4">
+                Start with a 14-day free trial
+              </div>
               <div className="flex items-center justify-center space-x-4 text-sm text-muted-foreground">
                 <div className="flex items-center">
                   <Check className="h-4 w-4 text-accent mr-1" />
@@ -138,5 +183,5 @@ export default function SignupPage() {
         </Card>
       </div>
     </div>
-  )
+  );
 }
