@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Twitter, Instagram, CheckCircle, AlertCircle, Plus } from "lucide-react"
+import InstagramLoginButton from "@/components/testInsta"
 
 interface ConnectedAccount {
   id: string
@@ -65,6 +66,8 @@ export default function ConnectionsPage() {
         <p className="text-muted-foreground">Connect your social media accounts to start tracking analytics</p>
       </div>
 
+
+<InstagramLoginButton/>
       <Alert className="mb-6">
         <AlertCircle className="h-4 w-4" />
         <AlertDescription>
